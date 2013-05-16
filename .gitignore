@@ -221,17 +221,17 @@ pip-log.txt
 ## MPLAB 8
 ##############
 
-.rlf
-.obj
-.lst
-.as
-.pre
-.p1
-.d
-.sym
-.sdb
-.map
-.hxl
+*.rlf
+*.obj
+*.lst
+*.as
+*.pre
+*.p1
+*.d
+*.sym
+*.sdb
+*.map
+*.hxl
 
 
 
