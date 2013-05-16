@@ -26,7 +26,8 @@ typedef unsigned char uchar;
 /******************* PRIMITIVES *****************/
 
 void term(unsigned char t); //terminal function
-
+void print(uchar *str);		//transmit string by USART
+void read_adc(unsigned char ch); //read adc(channel)
 /********************* CONST ********************/
 
 
@@ -57,15 +58,17 @@ void main()
 ANSELA = 0x00; //all digital
 CM1CON0 = 0x00; //comparator
 
+
 TRISA=0; 
 TRISC=0;
 TRISB=0b00100000;
-
 
 //ADC and Temperature Sensor
 FVRCON=0xF3; //TS enabled, High Range, ADC ref is 4,096V
 ADCON1=0b10000000; //Vref=internal, F=Fosc/2
 ADCON0=0b01110101; //ADCIN = TS, ADON
+
+
 
 //таймер ноль 
 T0CS=0; 
@@ -118,7 +121,7 @@ st=0;
 
 while(1)
 {
-uchar* ptr;
+//uchar* ptr;
 switch(st)
 	{
 	case 0:
@@ -133,7 +136,7 @@ switch(st)
 	case 1:
 		//t_active=1;
 		//t_active=0;
-		break;20
+		break;
 	case 2:
 		//t_active=1;
 		//t_active=0;
@@ -150,11 +153,6 @@ switch(st)
  void interrupt isr(void)
 { 
 unsigned char bufer;
-if(ADIF)
-	{
-	ADC = result|(ADRESH<<8);
-	ADC = result|ADRESL;
-	}
 	//serial transmit interrupt
 if(TXIF) //&&TXIE
 	{
@@ -221,19 +219,7 @@ void term(unsigned char t)
 			break;
 		case 'a':
 			//t_active=1;
-			txpos=0;
-			//while(txpos<30)
-			
-			//while((*txbufer++=*utime++)!='\0');
-			/*
-			for(txpos=0;txpos<30;txpos++)
-				{
-				txbufer[txpos]=*utime;
-				//txpos++;
-				//utime++;
-				}	*/
-			
-			//txpos=0;
+			print(utime);
 			//strcpy(txbufer, utime);//ctime(&unixtime));
 			st=0;
 			break;
@@ -248,10 +234,120 @@ void term(unsigned char t)
 	txpos++;
 	}
 
+/****************** PRINT ********************/
+void print(uchar *str)
+	{
+	uchar pos=0;
+		//while(txpos<30)			
+	while((txbufer[pos]=*str)!='\0')
+		{
+		//*txbufer=*utime;
+		++pos;
+		++str;
+		}
+	txpos=0;
+	}
 
-
-
-
+	
+/****************** ADC ********************//*
+void read_adc(unsigned char ch,speed,trig)
+	{
+	ADCON0=ch; //input selection	
+	ADCON1=speed; //speed of convertion selection	
+	ADCON2=trig;  //trigger source selection
+	
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
