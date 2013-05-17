@@ -24,7 +24,7 @@ typedef unsigned char uchar;
 #define up_ends_pullup 		RA0			//resistor 100k
 
 /******************* PRIMITIVES *****************/
-
+uchar *tempsens();
 void term(unsigned char t); //terminal function
 void print(uchar *str);		//transmit string by USART
 void read_adc(unsigned char ch); //read adc(channel)
@@ -34,17 +34,19 @@ void read_adc(unsigned char ch); //read adc(channel)
 /********************* GLOBAL VAR **********************/
 bit t_active;
 
+static unsigned int adresult; //A\D result global
+
 time_t unixtime; //UNIX format time variable
 
-uchar* utime;
+static uchar* utime; //Human format time variable
 
-uchar rxbufer[30];
-uchar rxpos=0;
+static uchar rxbufer[30];
+static uchar rxpos=0;
 
-uchar txbufer[30];
-uchar txpos=0; 
+static uchar txbufer[30];
+static uchar txpos=0; 
 
-uchar st; //status
+static uchar st; //status
 
 uchar T,i;
 
@@ -67,8 +69,8 @@ TRISB=0b00100000;
 FVRCON=0xF3; //TS enabled, High Range, ADC ref is 4,096V
 ADCON1=0b10000000; //Vref=internal, F=Fosc/2
 ADCON0=0b01110101; //ADCIN = TS, ADON
-
-
+ADCON2=0x40; //trigger source is T1 ovf
+ADIE=1;
 
 //таймер ноль 
 T0CS=0; 
@@ -153,6 +155,13 @@ switch(st)
  void interrupt isr(void)
 { 
 unsigned char bufer;
+unsigned int result;
+if(ADIF)
+	{
+	ADIF=0;
+	adresult = result|(ADRESH<<8);
+	adresult = result|ADRESL;
+	}
 	//serial transmit interrupt
 if(TXIF) //&&TXIE
 	{
@@ -237,6 +246,7 @@ void term(unsigned char t)
 /****************** PRINT ********************/
 void print(uchar *str)
 	{
+	uchar* grad;
 	uchar pos=0;
 		//while(txpos<30)			
 	while((txbufer[pos]=*str)!='\0')
@@ -245,20 +255,36 @@ void print(uchar *str)
 		++pos;
 		++str;
 		}
+	
+	//grad = tempsens();
+	txbufer[pos]=*grad;
+	++pos;
+	txbufer[pos]='\r';
+	++pos;
+	txbufer[pos]='\n';
 	txpos=0;
 	}
 
 	
-/****************** ADC ********************//*
+	
+/************* TEMPERATURE SENSOR ***************/	
+uchar* tempsens()
+	{
+	static uchar *t_temp; 
+	*t_temp = 51; //(adresult/1000)+48;
+	return t_temp;
+	}
+	
+/****************** ADC ********************/
+/*
 void read_adc(unsigned char ch,speed,trig)
 	{
 	ADCON0=ch; //input selection	
 	ADCON1=speed; //speed of convertion selection	
-	ADCON2=trig;  //trigger source selection
+	ADCON2=0x40;//trig;  //trigger source selection
+	}
 	
-	}*/
-	
-	
+	*/
 	
 	
 	

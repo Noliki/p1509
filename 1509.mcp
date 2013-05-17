@@ -39,7 +39,7 @@ file_001=yes
 file_002=yes
 file_003=yes
 [FILE_INFO]
-file_000=D:\_creatiff\_Projects\pic16f1509\fw\main.c
+file_000=main.c
 file_001=D:\_creatiff\_Projects\pic16f1509\fw\main.SYM
 file_002=D:\_creatiff\_Projects\pic16f1509\fw\main.STA
 file_003=D:\_creatiff\_Projects\pic16f1509\fw\main.TRE
@@ -48,10 +48,7 @@ suite_guid={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 suite_state=
 [TOOL_SETTINGS]
 TS{F42384DA-C7ED-4A02-880F-0F5E88735CE2}=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
-TS{F42384DA-C7ED-4A02-880F-0F5E88735CE2}000=
-TS{F42384DA-C7ED-4A02-880F-0F5E88735CE2}000_alt=yes
-[ACTIVE_FILE_SETTINGS]
-TS{F42384DA-C7ED-4A02-880F-0F5E88735CE2}000_active=yes
+TS{F42384DA-C7ED-4A02-880F-0F5E88735CE2}_alt=yes
 [INSTRUMENTED_TRACE]
 enable=0
 transport=0
