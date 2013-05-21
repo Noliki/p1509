@@ -256,12 +256,13 @@ void print(uchar *str)
 		++str;
 		}
 	
-	//grad = tempsens();
-	txbufer[pos]=*grad;
-	++pos;
+	grad = tempsens();
 	txbufer[pos]='\r';
 	++pos;
-	txbufer[pos]='\n';
+	//txbufer[pos]='\n';
+	//++pos;
+	txbufer[pos]=51;//*grad;
+	
 	txpos=0;
 	}
 
@@ -271,7 +272,9 @@ void print(uchar *str)
 uchar* tempsens()
 	{
 	static uchar *t_temp; 
-	*t_temp = 51; //(adresult/1000)+48;
+	//unsigned int adbuf;
+	//adbuf=adresult/
+	*t_temp = '\r'; //(adresult/1000)+48;
 	return t_temp;
 	}
 	
