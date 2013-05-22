@@ -34,8 +34,8 @@ void read_adc(unsigned char ch); //read adc(channel)
 
 /********************* GLOBAL VAR **********************/
 bit t_active;
-
-static unsigned int adresult; //A\D result global
+bit txcomp;
+unsigned int adresult; //A\D result global
 
 time_t unixtime; //UNIX format time variable
 
@@ -49,7 +49,7 @@ static uchar txpos=0;
 
 static uchar st; //status
 
-uchar T,i;
+//uchar T,i;
 
 
 void main()
@@ -130,7 +130,7 @@ switch(st)
 		t_active=1;
 		
 		utime=ctime(&unixtime);
-		
+		print(utime);
 		t_active=0;
 		//TXREG=txbufer[0]; //передача символа
 		//TXIE=1;
@@ -176,6 +176,7 @@ if(TXIF) //&&TXIE
 	else
 		{
 		txpos=0;				//обнуляем позицию буфера
+		txcomp=1;
 		}
 	}
 	//serial recieve interrupt
@@ -206,11 +207,11 @@ if(TMR1IF)
 	//прерывание таймера ноль
 if(T0IF)
 	{	
-	/*if(!t_active)//обнулить флаг прерывания
+	if(!t_active)//обнулить флаг прерывания
 		{
 		if(st<3)st++; //rolling of tasks
 		else st=0;
-		}*/
+		}
 	T0IF=0;		
 	}	
 } /*END OF INTERRUPT LOGIC*/
@@ -229,7 +230,7 @@ void term(unsigned char t)
 			break;
 		case 'a':
 			//t_active=1;
-			print(utime);
+			
 			//strcpy(txbufer, utime);//ctime(&unixtime));
 			st=0;
 			break;
@@ -247,14 +248,14 @@ void term(unsigned char t)
 /****************** PRINT ********************/
 void print(uchar *str)
 	{
-	uchar pos=0;		
+	uchar pos=0;
+	txpos=0;	
 	while((txbufer[pos]=*str)!='\0')
 		{
 		//*txbufer=*utime;
 		++pos;
 		++str;
 		}
-	txpos=0;
 	}
 
 /************** CLC Setup ***********************/
