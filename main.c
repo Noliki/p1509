@@ -25,6 +25,7 @@ typedef unsigned char uchar;
 
 /******************* PRIMITIVES *****************/
 uchar *tempsens();
+void clcs(uchar num, uchar* str);
 void term(unsigned char t); //terminal function
 void print(uchar *str);		//transmit string by USART
 void read_adc(unsigned char ch); //read adc(channel)
@@ -104,7 +105,6 @@ SPBRGL=0xA0; //9600    (0x22(34) for 115 000)
 RCIE=1; //interrupt enable
 TXIE=1;
 
-utime=ctime(&unixtime);
 	//EXTERNAL INTERRUPT (RA2)   
 //INTEDG=0; //ext int by falling edge
 //INTF=0; 
@@ -136,6 +136,7 @@ switch(st)
 		//TXIE=1;
 		break;
 	case 1:
+		//clcs(3,utime);
 		//t_active=1;
 		//t_active=0;
 		break;
@@ -205,11 +206,11 @@ if(TMR1IF)
 	//прерывание таймера ноль
 if(T0IF)
 	{	
-	if(!t_active)//обнулить флаг прерывания
+	/*if(!t_active)//обнулить флаг прерывания
 		{
 		if(st<3)st++; //rolling of tasks
 		else st=0;
-		}
+		}*/
 	T0IF=0;		
 	}	
 } /*END OF INTERRUPT LOGIC*/
@@ -246,27 +247,64 @@ void term(unsigned char t)
 /****************** PRINT ********************/
 void print(uchar *str)
 	{
-	uchar* grad;
-	uchar pos=0;
-		//while(txpos<30)			
+	uchar pos=0;		
 	while((txbufer[pos]=*str)!='\0')
 		{
 		//*txbufer=*utime;
 		++pos;
 		++str;
 		}
-	
-	grad = tempsens();
-	txbufer[pos]='\r';
-	++pos;
-	//txbufer[pos]='\n';
-	//++pos;
-	txbufer[pos]=51;//*grad;
-	
 	txpos=0;
 	}
 
-	
+/************** CLC Setup ***********************/
+void clcs(uchar num, uchar* str)
+	{
+	switch(num)
+		{
+		case 1:
+			CLC1GLS0 = str[0];
+			CLC1GLS1 = str[1];
+			CLC1GLS2 = str[2];
+			CLC1GLS3 = str[3];
+			CLC1SEL0 = str[4];
+			CLC1SEL1 = str[5];
+			CLC1POL  = str[6];
+			CLC1CON  = str[7];
+			break;
+		case 2:
+			CLC2GLS0 = str[0];
+			CLC2GLS1 = str[1];
+			CLC2GLS2 = str[2];
+			CLC2GLS3 = str[3];
+			CLC2SEL0 = str[4];
+			CLC2SEL1 = str[5];
+			CLC2POL  = str[6];
+			CLC2CON  = str[7];
+			break;
+		case 3:
+			CLC3GLS0 = str[0];
+			CLC3GLS1 = str[1];
+			CLC3GLS2 = str[2];
+			CLC3GLS3 = str[3];
+			CLC3SEL0 = str[4];
+			CLC3SEL1 = str[5];
+			CLC3POL  = str[6];
+			CLC3CON  = str[7];
+			break;
+		case 4:
+			CLC4GLS0 = str[0];
+			CLC4GLS1 = str[1];
+			CLC4GLS2 = str[2];
+			CLC4GLS3 = str[3];
+			CLC4SEL0 = str[4];
+			CLC4SEL1 = str[5];
+			CLC4POL  = str[6];
+			CLC4CON  = str[7];
+			break;
+		default: break;
+		}
+	}
 	
 /************* TEMPERATURE SENSOR ***************/	
 uchar* tempsens()
