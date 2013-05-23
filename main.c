@@ -62,17 +62,17 @@ ANSELA = 0x00; //all digital
 CM1CON0 = 0x00; //comparator
 
 
-TRISA=0; 
-TRISC=0;
+TRISA=0b00000000; 
+TRISC=0b00000000;
 TRISB=0b00100000;
-
+/*
 //ADC and Temperature Sensor
 FVRCON=0xF3; //TS enabled, High Range, ADC ref is 4,096V
 ADCON1=0b10000000; //Vref=internal, F=Fosc/2
 ADCON0=0b01110101; //ADCIN = TS, ADON
 ADCON2=0x40; //trigger source is T1 ovf
 ADIE=1;
-
+*/
 //таймер ноль 
 T0CS=0; 
 	//и прескаллер его
@@ -89,11 +89,14 @@ TMR1IE=1; //прерывание разрешено
 
 
 //USART
+/*
 for(txpos=0;txpos++;txpos<30)
 	{
 	txbufer[txpos]='\0';  //clear txbufer
 	rxbufer[txpos]='\0';  //clear rxbufer
-	}
+	}*/
+strcpy(txbufer, '\0');
+strcpy(rxbufer, '\0');
 CREN=1;
 TXEN=1;
 SYNC=0;
@@ -103,7 +106,7 @@ BRGH=1;
 SPBRGH=0x01; //9600    (0x00(0) for 115 000)
 SPBRGL=0xA0; //9600    (0x22(34) for 115 000)
 RCIE=1; //interrupt enable
-TXIE=1;
+TXIE=0;
 
 	//EXTERNAL INTERRUPT (RA2)   
 //INTEDG=0; //ext int by falling edge
@@ -121,9 +124,30 @@ GIE=1;
 
 st=0;
 
+			CLC1GLS0 = 0x00;
+			CLC1GLS1 = 0x08;
+			CLC1GLS2 = 0x00;
+			CLC1GLS3 = 0x08;
+			CLC1SEL0 = 0x05;
+			CLC1SEL1 = 0x00;
+			CLC1POL  = 0x04;
+			CLC1CON  = 0xC6;
+/*
+			CLC1GLS0 = 0x00;
+			CLC1GLS1 = 0x08;
+			CLC1GLS2 = 0x00;
+			CLC1GLS3 = 0x20;
+			CLC1SEL0 = 0x10;
+			CLC1SEL1 = 0x00;
+			CLC1POL  = 0x01;
+			CLC1CON  = 0xC6;
+*/
 while(1)
 {
+
+
 //uchar* ptr;
+/*
 switch(st)
 	{
 	case 0:
@@ -136,6 +160,7 @@ switch(st)
 		//TXIE=1;
 		break;
 	case 1:
+		
 		//clcs(3,utime);
 		//t_active=1;
 		//t_active=0;
@@ -149,9 +174,10 @@ switch(st)
 		//t_active=0;
 		break;
 			
-	}
+	}*/
 }//EOF While(1)
 }//EOF Main
+
 /********************************* INTERRUPT LOGIC ********************************/
  void interrupt isr(void)
 { 
@@ -164,17 +190,19 @@ if(ADIF)
 	adresult = result|ADRESL;
 	}
 	//serial transmit interrupt
-if(TXIF) //&&TXIE
+if(TXIF&&TXIE) //&&TXIE
 	{
-	TXIF=0;
+	//TXIF=0;
 	if(txbufer[txpos]!='\0') 	//если еще есть в буфере данные
 		{
+		
 		TXREG=txbufer[txpos]; 	//передаем
 		txbufer[txpos]='\0';	//стираем то, что передал
 		++txpos;				//сдвиг позициии
 		}
 	else
 		{
+		TXIE=0;
 		txpos=0;				//обнуляем позицию буфера
 		txcomp=1;
 		}
@@ -207,11 +235,11 @@ if(TMR1IF)
 	//прерывание таймера ноль
 if(T0IF)
 	{	
-	if(!t_active)//обнулить флаг прерывания
+	/*if(!t_active)//обнулить флаг прерывания
 		{
 		if(st<3)st++; //rolling of tasks
 		else st=0;
-		}
+		}*/
 	T0IF=0;		
 	}	
 } /*END OF INTERRUPT LOGIC*/
@@ -220,7 +248,6 @@ if(T0IF)
 
 void term(unsigned char t)
 	{
-
 	switch(t)
 		{
 		case '\r':
@@ -241,6 +268,7 @@ void term(unsigned char t)
 			break;
 		}
 	TXREG=txbufer[0]; //передача символа
+	TXIE=1;
 	txbufer[0]='\0';
 	txpos++;
 	}
@@ -261,6 +289,7 @@ void print(uchar *str)
 /************** CLC Setup ***********************/
 void clcs(uchar num, uchar* str)
 	{
+	/*
 	switch(num)
 		{
 		case 1:
@@ -304,7 +333,7 @@ void clcs(uchar num, uchar* str)
 			CLC4CON  = str[7];
 			break;
 		default: break;
-		}
+		}*/
 	}
 	
 /************* TEMPERATURE SENSOR ***************/	
