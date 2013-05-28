@@ -8,178 +8,191 @@ DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
 [File001]
+Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\task.p1
+Folder=Intermediary
+DeviceName=PIC16F1509
+LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
+LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
+TraceCmdString=
+DebugOptions=
+[File002]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.cof
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File002]
+[File003]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.hex
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File003]
+[File004]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.sym
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File004]
+[File005]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.map
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File005]
+[File006]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.hxl
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File006]
+[File007]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\startup.lst
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File007]
+[File008]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\startup.rlf
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File008]
+[File009]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\doprnt.p1
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File009]
+[File010]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\doprnt.pre
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File010]
+[File011]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.obj
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File011]
+[File012]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.lst
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File012]
+[File013]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.rlf
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=
-[File013]
+[File014]
 Location=D:\_creatiff\_Projects\pic16f1509\fw\p1509\1509.sdb
 Folder=Output
 DeviceName=PIC16F1509
 LanguageToolSuiteID={38171385-97B2-4EC5-BF2C-C2C027BA5B04}
 LanguageToolID={B6D1F1C2-3E8A-49F6-9C0A-75F5EBE32222}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\xc8\v1.12\bin\xc8.exe
-PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)|C:\Program Files (x86)\Microchip\MPASM Suite;D:\_creatiff\_Projects\pic16f1509\fw;C:\osa||$(LIBDIR)||$(LKRDIR)||
-SOLK=<src>|main.c||<obj>||<lib>||<lkr>||
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|main.c|task.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
-ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1
+ToolArgsString=C6=255 DB=0 DC=9 DF=0 DD=1 C2=0 C3=0 DE=1 D7=1 11E=0 121=0 122=0 123=0 124=0 125=0 11F=94 127=0 C9=3,1 
 TraceCmdString=
 DebugOptions=

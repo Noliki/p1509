@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "task.h"
 
  //__CONFIG (FOSC_INTOSC & WDTE_OFF & PWRTE_OFF & MCLRE_ON & CP_OFF & BOREN_OFF & CLKOUTEN_ON);
 // __CONFIG (WRT_OFF & STVREN_OFF & LVP_OFF);
@@ -33,6 +34,7 @@ void read_adc(unsigned char ch); //read adc(channel)
 
 
 /********************* GLOBAL VAR **********************/
+
 bit t_active;
 bit txcomp;
 unsigned int adresult; //A\D result global
@@ -89,12 +91,7 @@ TMR1IE=1; //прерывание разрешено
 
 
 //USART
-/*
-for(txpos=0;txpos++;txpos<30)
-	{
-	txbufer[txpos]='\0';  //clear txbufer
-	rxbufer[txpos]='\0';  //clear rxbufer
-	}*/
+
 strcpy(txbufer, '\0');
 strcpy(rxbufer, '\0');
 CREN=1;
@@ -124,14 +121,14 @@ GIE=1;
 
 st=0;
 
-			CLC1GLS0 = 0x00;
-			CLC1GLS1 = 0x08;
-			CLC1GLS2 = 0x00;
-			CLC1GLS3 = 0x08;
+			CLC1GLS0 = 0x02;
+			CLC1GLS1 = 0x20;
+			CLC1GLS2 = 0x08;
+			CLC1GLS3 = 0x00;
 			CLC1SEL0 = 0x05;
 			CLC1SEL1 = 0x00;
-			CLC1POL  = 0x04;
-			CLC1CON  = 0xC6;
+			CLC1POL  = 0x02;
+			CLC1CON  = 0xC4;
 /*
 			CLC1GLS0 = 0x00;
 			CLC1GLS1 = 0x08;
@@ -144,37 +141,14 @@ st=0;
 */
 while(1)
 {
+task1();
+task2();
+task3();
+task4();
+task5();
+task6();
+msgprc();
 
-
-//uchar* ptr;
-/*
-switch(st)
-	{
-	case 0:
-		t_active=1;
-		
-		utime=ctime(&unixtime);
-		print(utime);
-		t_active=0;
-		//TXREG=txbufer[0]; //передача символа
-		//TXIE=1;
-		break;
-	case 1:
-		
-		//clcs(3,utime);
-		//t_active=1;
-		//t_active=0;
-		break;
-	case 2:
-		//t_active=1;
-		//t_active=0;
-		break;
-	case 3:
-		//t_active=1;
-		//t_active=0;
-		break;
-			
-	}*/
 }//EOF While(1)
 }//EOF Main
 
