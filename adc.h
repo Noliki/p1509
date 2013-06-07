@@ -1,4 +1,4 @@
-
+//adc channels header p16f1509
 
 #define ch0 0b00000000
 #define ch1 0b00000100
@@ -15,16 +15,3 @@
 #define temp 0b01110100
 #define dac 0b01111000
 #define fvr 0b01111100
-
-
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000
-#define ch0 0b00000000

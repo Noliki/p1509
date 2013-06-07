@@ -115,39 +115,37 @@ CLC1IF = 0;
 CLC1IE = 0;
 
 	//ГЛОБАЛЬНЫЕ ПРЕРЫВАНИЯ
-PEIE=1;
-GIE=1;
+
 
 
 st=0;
 
-			CLC1GLS0 = 0x02;
-			CLC1GLS1 = 0x20;
-			CLC1GLS2 = 0x08;
-			CLC1GLS3 = 0x00;
-			CLC1SEL0 = 0x05;
-			CLC1SEL1 = 0x00;
-			CLC1POL  = 0x02;
-			CLC1CON  = 0xC4;
+CLC1GLS0 = 0x02;
+CLC1GLS1 = 0x20;
+CLC1GLS2 = 0x08;
+CLC1GLS3 = 0x00;
+CLC1SEL0 = 0x05;
+CLC1SEL1 = 0x00;
+CLC1POL  = 0x02;
+CLC1CON  = 0xC4;
 /*
-			CLC1GLS0 = 0x00;
-			CLC1GLS1 = 0x08;
-			CLC1GLS2 = 0x00;
-			CLC1GLS3 = 0x20;
-			CLC1SEL0 = 0x10;
-			CLC1SEL1 = 0x00;
-			CLC1POL  = 0x01;
-			CLC1CON  = 0xC6;
+CLC1GLS0 = 0x00;
+CLC1GLS1 = 0x08;
+CLC1GLS2 = 0x00;
+CLC1GLS3 = 0x20;
+CLC1SEL0 = 0x10;
+CLC1SEL1 = 0x00;
+CLC1POL  = 0x01;
+CLC1CON  = 0xC6;
 */
+init_tasks();
+PEIE=1;
+GIE=1;
 while(1)
 {
+task0();
 task1();
-task2();
-task3();
-task4();
-task5();
-task6();
-msgprc();
+msg_prc();
 
 }//EOF While(1)
 }//EOF Main
@@ -209,11 +207,7 @@ if(TMR1IF)
 	//прерывание таймера ноль
 if(T0IF)
 	{	
-	/*if(!t_active)//обнулить флаг прерывания
-		{
-		if(st<3)st++; //rolling of tasks
-		else st=0;
-		}*/
+	
 	T0IF=0;		
 	}	
 } /*END OF INTERRUPT LOGIC*/
