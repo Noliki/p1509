@@ -64,7 +64,7 @@ void task0(void)
 	switch(tst[0])
 		{
 		case 0:
-			utime=ctime(&unixtime);
+			//utime=ctime(&unixtime);
 			tmsg[1]=1;
 			tst[0]=1;
 			break;

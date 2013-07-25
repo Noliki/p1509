@@ -11,6 +11,8 @@
 #include <time.h>
 #include "task.h"
 
+
+
  //__CONFIG (FOSC_INTOSC & WDTE_OFF & PWRTE_OFF & MCLRE_ON & CP_OFF & BOREN_OFF & CLKOUTEN_ON);
 // __CONFIG (WRT_OFF & STVREN_OFF & LVP_OFF);
 
@@ -23,6 +25,7 @@ typedef unsigned char uchar;
 #define up_valve 			RA5 		//high valve
 #define down_ends_pullup 	RC1			//resistor 100k
 #define up_ends_pullup 		RA0			//resistor 100k
+
 
 /******************* PRIMITIVES *****************/
 uchar *tempsens();
@@ -49,7 +52,11 @@ static uchar rxpos=0;
 static uchar txbufer[30];
 static uchar txpos=0; 
 
+unsigned char bufer;
+
 static uchar st; //status
+
+bit RC;
 
 //uchar T,i;
 
@@ -63,10 +70,17 @@ void main()
 ANSELA = 0x00; //all digital
 CM1CON0 = 0x00; //comparator
 
+/*CLC Config
+TRISA=0b00000010; 
+TRISC=0b11001000;
+TRISB=0b00110000;
+*/
 
 TRISA=0b00000000; 
 TRISC=0b00000000;
-TRISB=0b00100000;
+TRISB=0b01010000; //i2c
+
+
 /*
 //ADC and Temperature Sensor
 FVRCON=0xF3; //TS enabled, High Range, ADC ref is 4,096V
@@ -89,7 +103,14 @@ T0IE=1;   //TMR0 int enable
 T1CON=0b10001001; 
 TMR1IE=1; //прерывание разрешено
 
-
+//MSSP
+ SSPADD = 0x09;              /* I2C @ 100KHz (Fosc = 4MHz) */
+ SSPSTAT &= 0x3F;                // power on state 
+ SSPCON = 0x00;                 // power on state
+ SSPCON2 = 0x00;                 // power on state
+ SSPCON |= sync_mode;           // select serial mode 
+ SSPSTAT |= slew;                // slew rate on/off 
+ SSPCON |= SSPENB;              // enable synchronous serial port
 //USART
 
 strcpy(txbufer, '\0');
@@ -117,43 +138,75 @@ CLC1IE = 0;
 	//ГЛОБАЛЬНЫЕ ПРЕРЫВАНИЯ
 
 
-
+/*
 st=0;
 
-CLC1GLS0 = 0x02;
-CLC1GLS1 = 0x20;
-CLC1GLS2 = 0x08;
-CLC1GLS3 = 0x00;
-CLC1SEL0 = 0x05;
-CLC1SEL1 = 0x00;
-CLC1POL  = 0x02;
-CLC1CON  = 0xC4;
-/*
-CLC1GLS0 = 0x00;
-CLC1GLS1 = 0x08;
-CLC1GLS2 = 0x00;
-CLC1GLS3 = 0x20;
-CLC1SEL0 = 0x10;
-CLC1SEL1 = 0x00;
-CLC1POL  = 0x01;
-CLC1CON  = 0xC6;
+	CLC1GLS0 = 0x01;
+	CLC1GLS1 = 0x08;
+	CLC1GLS2 = 0x00;
+	CLC1GLS3 = 0x00;
+	CLC1SEL0 = 0x71;
+	CLC1SEL1 = 0x00;
+	CLC1POL  = 0x80;
+	CLC1CON  = 0xC0;
+
+	CLC2GLS0 = 0x02;
+	CLC2GLS1 = 0x08;
+	CLC2GLS2 = 0x00;
+	CLC2GLS3 = 0x00;
+	CLC2SEL0 = 0x70;
+	CLC2SEL1 = 0x00;
+	CLC2POL  = 0x80;
+	CLC2CON  = 0xC0;
+
+	CLC3GLS0 = 0x01;
+	CLC3GLS1 = 0x00;
+	CLC3GLS2 = 0x00;
+	CLC3GLS3 = 0x40;
+	CLC3SEL0 = 0x00;
+	CLC3SEL1 = 0x50;
+	CLC3POL  = 0x00;
+	CLC3CON  = 0xC3;
+
+	CLC4GLS0 = 0x02;
+	CLC4GLS1 = 0x00;
+	CLC4GLS2 = 0x00;
+	CLC4GLS3 = 0x80;
+	CLC4SEL0 = 0x00;
+	CLC4SEL1 = 0x50;
+	CLC4POL  = 0x00;
+	CLC4CON  = 0xC1;
 */
 init_tasks();
+
+
 PEIE=1;
 GIE=1;
+
+					/****** LOOP *******/
+
 while(1)
 {
+  
+   
+ 
+
+if(RC)
+	{
+	RC=0;
+	term(bufer);
+	}
 task0();
 task1();
+task2();
 msg_prc();
 
 }//EOF While(1)
 }//EOF Main
 
 /********************************* INTERRUPT LOGIC ********************************/
- void interrupt isr(void)
+void interrupt isr(void)
 { 
-unsigned char bufer;
 unsigned int result;
 if(ADIF)
 	{
@@ -166,8 +219,7 @@ if(TXIF&&TXIE) //&&TXIE
 	{
 	//TXIF=0;
 	if(txbufer[txpos]!='\0') 	//если еще есть в буфере данные
-		{
-		
+		{	
 		TXREG=txbufer[txpos]; 	//передаем
 		txbufer[txpos]='\0';	//стираем то, что передал
 		++txpos;				//сдвиг позициии
@@ -184,7 +236,7 @@ if(RCIF)
 	{
 	RCIF=0;
 	bufer=RCREG;
-	term(bufer);
+	RC=1; //recieve complite
 	}
 	//прерывание таймера ноль
 if(CLC1IF&&CLC1IE)
@@ -192,7 +244,6 @@ if(CLC1IF&&CLC1IE)
 		//обнулить флаг прерывания
     CLC1IF=0;
 	}
-
 //прерывание таймера 1
 if(TMR1IF)
 	{
@@ -202,19 +253,16 @@ if(TMR1IF)
 	TMR1H=0x7F;
 	unixtime++;
 	}
-
-
 	//прерывание таймера ноль
 if(T0IF)
 	{	
-	
 	T0IF=0;		
 	}	
 } /*END OF INTERRUPT LOGIC*/
 
 
 
-void term(unsigned char t)
+void term(unsigned char t) //terminal automat
 	{
 	switch(t)
 		{

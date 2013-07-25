@@ -1,4 +1,4 @@
-//adc channels header p16f1509
+//adc channels header mask p16f1509
 
 #define ch0 0b00000000
 #define ch1 0b00000100
