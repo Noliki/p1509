@@ -58,7 +58,7 @@ static uchar st; //status
 
 bit RC;
 
-//uchar T,i;
+uchar T,i;
 
 
 void main()
@@ -93,9 +93,9 @@ ADIE=1;
 T0CS=0; 
 	//и прескаллер его
 PSA=1;
-PS0=0;
-PS1=0;
-PS2=0;
+PS0=1;
+PS1=1;
+PS2=1;
 	//прерывание таймера ноль
 T0IE=1;   //TMR0 int enable
 
@@ -104,15 +104,14 @@ T1CON=0b10001001;
 TMR1IE=1; //прерывание разрешено
 
 //MSSP
- SSPADD = 0x09;              /* I2C @ 100KHz (Fosc = 4MHz) */
- SSPSTAT &= 0x3F;                // power on state 
- SSPCON = 0x00;                 // power on state
- SSPCON2 = 0x00;                 // power on state
- SSPCON |= sync_mode;           // select serial mode 
- SSPSTAT |= slew;                // slew rate on/off 
- SSPCON |= SSPENB;              // enable synchronous serial port
-//USART
+SSPBUF = 0x0;
+SSPADD = 0x27;              /* I2C @ 100KHz (Fosc = 16MHz) */ 
+SSPCON = 0x28;                 // power on state master mode
+//SSPCON2 = 0x00;                 // power on state
 
+
+//USART
+/*
 strcpy(txbufer, '\0');
 strcpy(rxbufer, '\0');
 CREN=1;
@@ -125,7 +124,7 @@ SPBRGH=0x01; //9600    (0x00(0) for 115 000)
 SPBRGL=0xA0; //9600    (0x22(34) for 115 000)
 RCIE=1; //interrupt enable
 TXIE=0;
-
+*/
 	//EXTERNAL INTERRUPT (RA2)   
 //INTEDG=0; //ext int by falling edge
 //INTF=0; 
@@ -177,7 +176,7 @@ st=0;
 	CLC4POL  = 0x00;
 	CLC4CON  = 0xC1;
 */
-init_tasks();
+//init_tasks();
 
 
 PEIE=1;
@@ -187,10 +186,42 @@ GIE=1;
 
 while(1)
 {
-  
-   
- 
+	SEN=1;
+	while(SEN); 
+	SSPBUF=0xFF;//0b01011000;
+	while(BF);
+	TMR0=0;
+	i=2;
+	while(i)
+	if(ACKSTAT)RA0=1;
+	else 
+		{
+		RA0=0;
+		TMR0=0;
+		i=1;
+		while(i);
+		/*SSPBUF=129;
+		while(BF);
+		TMR0=0;
+		i=1;
+		while(i)
+		if(ACKSTAT)RA0=1;*/
+		}
+	
+	
+	
+	
+	PEN=1;
+	while(PEN);
+	
+	
+	
+	T=10;
+	while(T);
 
+ 
+ 
+/*
 if(RC)
 	{
 	RC=0;
@@ -200,7 +231,7 @@ task0();
 task1();
 task2();
 msg_prc();
-
+*/
 }//EOF While(1)
 }//EOF Main
 
@@ -249,14 +280,18 @@ if(TMR1IF)
 	{
 	//asm("clrwdt");
 	TMR1IF=0;
-	TMR1L=0x00;
-	TMR1H=0x7F;
+	TMR1L=0x20;
+	TMR1H=0xFF;//TMR1H=0x7F;
 	unixtime++;
+	if(T)--T;
 	}
 	//прерывание таймера ноль
 if(T0IF)
-	{	
+	{
 	T0IF=0;		
+	if(i)--i;
+	
+		
 	}	
 } /*END OF INTERRUPT LOGIC*/
 
