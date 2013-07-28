@@ -94,8 +94,8 @@ T0CS=0;
 	//и прескаллер его
 PSA=1;
 PS0=1;
-PS1=1;
-PS2=1;
+PS1=0;
+PS2=0;
 	//прерывание таймера ноль
 T0IE=1;   //TMR0 int enable
 
@@ -103,11 +103,6 @@ T0IE=1;   //TMR0 int enable
 T1CON=0b10001001; 
 TMR1IE=1; //прерывание разрешено
 
-//MSSP
-SSPBUF = 0x0;
-SSPADD = 0x27;              /* I2C @ 100KHz (Fosc = 16MHz) */ 
-SSPCON = 0x28;                 // power on state master mode
-//SSPCON2 = 0x00;                 // power on state
 
 
 //USART
@@ -177,50 +172,92 @@ st=0;
 	CLC4CON  = 0xC1;
 */
 //init_tasks();
-
-
+#define master 0
+#define slave 1
+//unsigned char ms=slave; 			//master or slave, 0 == master
+unsigned char ms=master;
+unsigned char buf;
+switch(ms)
+	{
+	case master: 
+			//MSSP
+		SSPBUF = 0x0;
+		SSPADD = 0x27;              /* I2C @ 100KHz (Fosc = 16MHz) */ 
+		SSPCON = 0x28;                 //i2c enable, master mode 
+		              
+		break;
+	case slave:
+		//MSSP
+		SSPBUF = 0x0;
+		SSPADD = 0b11001100;              //ADDRESS
+		SSPCON = 0x26;                 //i2c enable, slave mode
+		BOEN=1; 					// SSPOV ignored, ACK wiil be generated if address taken
+		             
+	}
+	
+	
 PEIE=1;
 GIE=1;
 
 					/****** LOOP *******/
-
 while(1)
 {
-	SEN=1;
-	while(SEN); 
-	SSPBUF=0xFF;//0b01011000;
-	while(BF);
-	TMR0=0;
-	i=2;
-	while(i)
-	if(ACKSTAT)RA0=1;
-	else 
-		{
-		RA0=0;
-		TMR0=0;
-		i=1;
-		while(i);
-		/*SSPBUF=129;
+
+
+switch(ms)
+	{
+	
+	case master:
+		SEN=1;
+		while(SEN); 
+		SSPBUF=0b11001100;//0b10100000;//0b10111110;//
 		while(BF);
 		TMR0=0;
-		i=1;
+		i=2;
 		while(i)
-		if(ACKSTAT)RA0=1;*/
-		}
+		if(ACKSTAT)RA0=0;
+		else 
+			{
+			RA0=1;
+			TMR0=0;
+			i=1;
+			while(i);
+			SSPBUF=128;
+			while(BF);
+			TMR0=0;
+			i=1;
+			while(i);
+			if(ACKSTAT)RA0=0;
+			else 
+				{
+				//RCEN=1;
+				///while(!BF);
+				//buf=SSPBUF;
+				}
+			
+			}	
+		PEN=1;
+		while(PEN);	
+		T=10;
+		while(T);
+		break;
+		
+	case slave:
+		if(BF)buf=SSPBUF;
+		if(buf==128)
+			{
+			//SSPBUF=0x55;
+			//while(BF);
+			}
+		break;
 	
 	
 	
 	
-	PEN=1;
-	while(PEN);
 	
 	
 	
-	T=10;
-	while(T);
-
- 
- 
+	}
 /*
 if(RC)
 	{
